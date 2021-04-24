@@ -1,4 +1,5 @@
 import './style.css';
+import { Layer } from './Layer/index';
 
 console.log('funguju!');
 
@@ -39,4 +40,82 @@ tlacitkoObjednat.addEventListener('click', () => {
     napoj.classList.add('drink__cup--selected');
     tlacitkoObjednat.textContent = 'Zrušit';
   }
+});
+
+/* ingredience jako komponenty
+Každý nápoj bude obsahovat seznam ingrediencí. Na stránce vidíme příklad pro cappuccino. Budeme chtít, aby ingredience byla komponenta.
+
+Vytvořte komponentu Layer, která očekává props v následujícím tvaru.
+{
+  color: '#feeeca',
+  label: 'mléčná pěna',
+}
+Komponenta nechť vrací řetězec obsahující výsledné HTML.
+Použijte vaši komponentu a pomocí vlastnosti innerHTML zapojte do stránky tři ingredience pro cappuccino. Stránka by měla pro uživatele vypadat stejně jako na začátku.
+Ve vašem projektu vytvořte pro vaši komponentu separátní složku s názvem Layer. Tato složka bude v souboru index.js obsahovat JavaScript kód vaší komponenty. Kompnentu správně exportujte a správně ji importujte v hlavním index.js celého projektu. Vyzkoušejte, že váš projekt funguje.
+Do složky Layer vložte také soubor style.css a přesuňte do něj CSS styly, které se přímo týkají této komponenty. Nezapomeňte váš CSS soubor správně importovat aby jej Webpack zahrnul do výsledného sestavení.
+Jakmile váš projekt funguje, commitněte váš kód s výborně napsanou commit zprávou a pushněte do vzdáleného repozitáře. 
+*/
+
+/* přendáno do samostatné komponenty
+const Layer = (props) => {
+  const napojElm = document.createElement('div');
+  napojElm.className = 'layer';
+  napojElm.innerHTML = `
+  <div
+    class="layer__color"
+    style="background-color: ${props.color}"
+  ></div>
+  <div class="layer__label">${props.label}</div>
+</div>`;
+  return napojElm;
+};
+*/
+const drinkInfoElm = document.querySelector('.drink__info');
+// drinkInfoElm.appendChild(Layer({ color: '#feeeca', label: 'mléčná pěna' }));
+// drinkInfoElm.appendChild(Layer({ color: '#fed7b0', label: 'teplé mléko' }));
+// drinkInfoElm.appendChild(Layer({ color: '#613916', label: 'espresso' }));
+
+/* seznam ingrediencí 
+V tomto cvičení budeme chtít zařídit, abychom seznam ingrediencí dokázali zobrazit podle dat uložených v poli.
+
+Uvnitř hlavního index.js si vytvořte následujicí globální proměnnou.
+
+const layers = [
+  {
+    color: '#feeeca',
+    label: 'mléčná pěna',
+  },
+  {
+    color: '#fed7b0',
+    label: 'teplé mléko',
+  },
+  {
+    color: '#613916',
+    label: 'espresso',
+  },
+];
+Použijte cyklus for nebo forEach, projděte seznam ingrediencí položku po položce a pomocí komponenty Layer je zobrazte každou ingredienci na stránce.
+
+Jakmile je váš kód funkční, udělejte commit s profesionálně napsanou zprávou a pushněte váš kód do vzdáleného repozitáře.
+*/
+
+const layers = [
+  {
+    color: '#feeeca',
+    label: 'mléčná pěna',
+  },
+  {
+    color: '#fed7b0',
+    label: 'teplé mléko',
+  },
+  {
+    color: '#613916',
+    label: 'espresso',
+  },
+];
+
+layers.forEach((polozkaLayeru) => {
+  //console.log(polozkaLayeru);
+  drinkInfoElm.appendChild(Layer(polozkaLayeru));
 });

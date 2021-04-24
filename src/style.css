@@ -210,7 +210,7 @@ nav a:hover {
 .order-btn:active {
   background-color: #e67e51;
 }
-
+/* 
 .layer {
   display: flex;
   padding: 0.25rem;
@@ -230,7 +230,7 @@ nav a:hover {
   height: 1rem;
 
   line-height: 1rem;
-}
+} */
 
 .gallery {
   padding-top: 0;
