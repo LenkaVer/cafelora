@@ -1,14 +1,8 @@
 import './style.css';
 import { Layer } from './Layer/index';
+import { Drink } from './Drink/index';
 
 console.log('funguju!');
-
-/*zprovoznění navigace
-Chceme zařídit, aby se na úzkých displejích po kliknutí na ikonku zobrazovala navigace. Zatím se to neděje a tím přichází ke slovu JavaScript.
-
-V JavaScriptu vyberte ze stránky ikonku #nav-btn. Připojte k ní posluchač události click. Tento posluchač odebere nebo přidá třídu nav-closed na prvku nav. Klikáním na ikonku tak můžeme zobrazovat nebo skrývat navigaci.
-Připojte posluchač události také na všechny položky navigace. Zařiďte, aby se navigace při kliknutí na libovolnou její položku schovala. Zde se vám jistě bude hodit metoda querySelectorAll.
-Jakmile je váš kód funkční, proveďte commmit s hezky popisnou zprávou a pushněte do vzdáleného repozitáře.*/
 
 const navigaceElm = document.querySelector('#nav-btn');
 navigaceElm.addEventListener('click', () => {
@@ -30,6 +24,7 @@ Na tlačíko .order-btn pověste posluchač, který při kliknutí přidá na pr
 Při opětovném kliknutí na tlačítko chceme zařídit, aby se objednávka zrušila a nápis na tlačítku se vrátil zpět na Objednat. Tohoto můžete docílit například tak, že si vytvoříte globální proměnnou ordered, která bude obsahovat true nebo false podle toho, zde je nápoj objednaný či nikoliv.
 Ve chvíli, kdy máte objednávání funkční commitněte váš kód se smysluplnou zprávnou a pushněte jej. */
 
+/* moje verze přes ordered 
 const tlacitkoObjednat = document.querySelector('.order-btn');
 const napoj = document.querySelector('.drink__cup');
 tlacitkoObjednat.addEventListener('click', () => {
@@ -42,6 +37,23 @@ tlacitkoObjednat.addEventListener('click', () => {
   }
 });
 
+//verze s ordered
+const tlacitkoObjednat = document.querySelector('.order-btn');
+const napoj = document.querySelector('.drink__cup');
+let isOrdered = true;
+
+tlacitkoObjednat.addEventListener('click', () => {
+  if (isOrdered) {
+    tlacitkoObjednat.textContent = 'Zrušit';
+    napoj.classList.add('drink__cup--selected');
+    isOrdered = false;
+  } else {
+    tlacitkoObjednat.textContent = 'Objednat';
+    napoj.classList.remove('drink__cup--selected');
+    isOrdered = true;
+  }
+});
+*/
 /* ingredience jako komponenty
 Každý nápoj bude obsahovat seznam ingrediencí. Na stránce vidíme příklad pro cappuccino. Budeme chtít, aby ingredience byla komponenta.
 
@@ -71,7 +83,7 @@ const Layer = (props) => {
   return napojElm;
 };
 */
-const drinkInfoElm = document.querySelector('.drink__info');
+//const drinkInfoElm = document.querySelector('.drink__info');
 // drinkInfoElm.appendChild(Layer({ color: '#feeeca', label: 'mléčná pěna' }));
 // drinkInfoElm.appendChild(Layer({ color: '#fed7b0', label: 'teplé mléko' }));
 // drinkInfoElm.appendChild(Layer({ color: '#613916', label: 'espresso' }));
@@ -99,7 +111,7 @@ Použijte cyklus for nebo forEach, projděte seznam ingrediencí položku po pol
 
 Jakmile je váš kód funkční, udělejte commit s profesionálně napsanou zprávou a pushněte váš kód do vzdáleného repozitáře.
 */
-
+/*
 const layers = [
   {
     color: '#feeeca',
@@ -118,4 +130,66 @@ const layers = [
 layers.forEach((polozkaLayeru) => {
   //console.log(polozkaLayeru);
   drinkInfoElm.appendChild(Layer(polozkaLayeru));
+});
+*/
+
+/*drinkList.appendChild(
+  Drink({
+    id: 'romano',
+    name: 'Romano',
+    ordered: false,
+    layers: [
+      {
+        color: '#fbdf5b',
+        label: 'citrón',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
+  }),
+);
+*/
+const drinks = [
+  {
+    id: 'cappuccino',
+    name: 'Cappuccino',
+    ordered: false,
+    layers: [
+      {
+        color: '#feeeca',
+        label: 'mléčná pěna',
+      },
+      {
+        color: '#fed7b0',
+        label: 'teplé mléko',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
+  },
+  {
+    id: 'romano',
+    name: 'Romano',
+    ordered: false,
+    layers: [
+      {
+        color: '#fbdf5b',
+        label: 'citrón',
+      },
+      {
+        color: '#613916',
+        label: 'espresso',
+      },
+    ],
+  },
+];
+
+const drinkList = document.querySelector('.drinks-list');
+drinks.forEach((drink) => {
+  //console.log(drink)
+  drinkList.appendChild(Drink(drink));
 });
