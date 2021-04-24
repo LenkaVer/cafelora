@@ -189,7 +189,14 @@ const drinks = [
 ];
 
 const drinkList = document.querySelector('.drinks-list');
-drinks.forEach((drink) => {
-  //console.log(drink)
-  drinkList.appendChild(Drink(drink));
-});
+// drinks.forEach((drink) => {
+//   //console.log(drink)
+//   drinkList.appendChild(Drink(drink));
+// });
+fetch('https://apps.kodim.cz/daweb/cafelora/api/drinks')
+  .then((response) => response.json())
+  .then((json) => {
+    json.forEach((drink) => {
+      drinkList.appendChild(Drink(drink));
+    });
+  });
